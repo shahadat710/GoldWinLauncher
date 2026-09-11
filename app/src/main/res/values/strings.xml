@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">GoldWin Launcher</string>
     <string name="btn_goldwin">GoldWin</string>
-    <string name="btn_settings">Settings (Wi-Fi)</string>
+    <string name="btn_settings">Settings</string>
 </resources>
