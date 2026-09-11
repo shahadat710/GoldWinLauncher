@@ -2,29 +2,59 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="center"
-    android:background="#1A1A2E"
-    android:padding="32dp">
+    android:background="#FFFFFF">
 
-    <Button
+    <LinearLayout
         android:id="@+id/btnMyApp"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:layout_marginBottom="28dp"
-        android:text="@string/btn_goldwin"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#C9A227" />
+        android:layout_width="130dp"
+        android:layout_height="150dp"
+        android:layout_marginEnd="50dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
 
-    <Button
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_launcher"
+            android:contentDescription="@string/btn_goldwin" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_goldwin"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/btnSettings"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:text="@string/btn_settings"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#333355" />
+        android:layout_width="130dp"
+        android:layout_height="150dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@android:drawable/ic_menu_manage"
+            android:contentDescription="@string/btn_settings" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/btn_settings"
+            android:textColor="#000000"
+            android:textSize="15sp" />
+    </LinearLayout>
 
 </LinearLayout>
