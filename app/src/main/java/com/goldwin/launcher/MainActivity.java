@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
         btnMyApp.setOnClickListener(v -> openMyApp());
         btnSettings.setOnClickListener(v -> openWifiSettings());
         btnMenu.setOnClickListener(this::showMenu);
+
+        // Try to show the real GoldWin app icon on the button
+        try {
+            ImageView icon = findViewById(R.id.imgGoldWinIcon);
+            icon.setImageDrawable(getPackageManager().getApplicationIcon(TARGET_PACKAGE));
+        } catch (Exception e) {
+            // Keep default icon if GoldWin app isn't found
+        }
     }
 
     private void showMenu(View anchor) {
