@@ -1,11 +1,14 @@
 package com.goldwin.launcher;
 
+import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.InputType;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -14,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TARGET_PACKAGE = "org.chromium.webapk.a99635ed460bff022_v2";
+    private static final String MENU_PASSWORD = "710710";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
         btnSettings.setOnClickListener(v -> openWifiSettings());
         btnMenu.setOnClickListener(this::showMenu);
 
-        // Try to show the real GoldWin app icon on the button
         try {
             ImageView icon = findViewById(R.id.imgGoldWinIcon);
             icon.setImageDrawable(getPackageManager().getApplicationIcon(TARGET_PACKAGE));
@@ -43,15 +46,35 @@ public class MainActivity extends AppCompatActivity {
         popup.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if (id == R.id.menu_full_settings) {
-                openFullSettings();
+                askPasswordThen(this::openFullSettings);
                 return true;
             } else if (id == R.id.menu_change_home) {
-                openChangeHomeApp();
+                askPasswordThen(this::openChangeHomeApp);
                 return true;
             }
             return false;
         });
         popup.show();
+    }
+
+    private void askPasswordThen(Runnable action) {
+        EditText input = new EditText(this);
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        input.setHint("Enter password");
+
+        new AlertDialog.Builder(this)
+                .setTitle("Password Required")
+                .setView(input)
+                .setPositiveButton("OK", (dialog, which) -> {
+                    String entered = input.getText().toString();
+                    if (entered.equals(MENU_PASSWORD)) {
+                        action.run();
+                    } else {
+                        Toast.makeText(this, "Incorrect password", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 
     private void openFullSettings() {
